@@ -1,0 +1,16 @@
+{
+	"invites":{
+		"attendends":[
+			{"id":1,"name":"Ramiro Sanchez Alegria","number_persons":1,"table_number":1}
+			{"id":2,"name":"CECILIA PEREGRINA","number_persons":6,"table_number":1}
+		]
+	},
+	"tables":[
+		{"id":1,"table_number":1},
+		{"id":2,"table_number":2},
+		{"id":3,"table_number":3},
+		{"id":4,"table_number":4},
+		{"id":5,"table_number":5},
+		{"id":6,"table_number":6}
+	]
+}

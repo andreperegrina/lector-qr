@@ -1,4 +1,5 @@
 const electron = require('electron')
+const storage = require('electron-storage');
 // Module to control application life.
 const app = electron.app
 // Module to create native browser window.
@@ -14,13 +15,22 @@ let mainWindow
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600})
-
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
     slashes: true
   }))
+  // mainWindow.webContents.on('did-finish-load', () => {
+  //   storage.get("database.json", (err, data) => {
+  //     if (err) {
+  //       console.error(err)
+  //     } else {
+  //       mainWindow.webContents.send('load-database', data)
+  //     }
+  //   });
+  // });
+
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()

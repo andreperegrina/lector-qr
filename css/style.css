@@ -1,0 +1,191 @@
+body{
+  background-color: #fcfcfc;
+  height: 100%;
+}
+main,header{
+  padding-left: 300px;
+}
+nav.top-nav a.page-title {
+    line-height: 122px;
+    font-size: 48px;
+}
+nav.top-nav {
+    height: 122px;
+    box-shadow: none;
+}
+.fill-height-or-more {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.fill-height-or-more > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media only screen and (min-width: 993px){
+  .container {
+      width: 85%;
+  }
+}
+.padding-20{
+  padding: 20px;
+}
+
+.circle {
+	border-radius: 50%;
+	/* width and height can be anything, as long as they're equal */
+}
+
+.circle-table{
+	width: 50px;
+	height: 50px; 
+	background: #303F9F;
+	display: inline-block;
+	color: white;
+	-webkit-transition: all 0.30s ease-in-out;
+	-moz-transition: all 0.30s ease-in-out;
+	-ms-transition: all 0.30s ease-in-out;
+	-o-transition: all 0.30s ease-in-out;
+}
+
+
+.Aligner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Aligner-item {
+  max-width: 50%;
+}
+
+.Aligner-item--top {
+  align-self: flex-start;
+}
+
+.Aligner-item--bottom {
+  align-self: flex-end;
+}
+
+.blueprint {
+ 
+  background-color:#2873ac;
+  background-image: linear-gradient(#99b3c5 2px, transparent 2px),
+    linear-gradient(90deg, #99b3c5 2px, transparent 2px),
+    linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+  background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px
+
+  
+}
+
+
+.hexagono {     
+	width: 71px;
+    height: 37px;
+   	position: relative; 
+	background: #303F9F;
+   
+    -ms-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+} 
+.hexagono span {     
+   
+    -ms-transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+} 
+
+.hexagono:before { 
+   width: 0; 
+   height: 0; 
+   content: ""; 
+   position: absolute; 
+   top: -25px; 
+   left: 0; 
+   border-left: 35px solid transparent; 
+   border-right: 36px solid transparent; 
+   border-bottom: 25px solid #303F9F;
+	-webkit-transition: all 0.30s ease-in-out;
+	-moz-transition: all 0.30s ease-in-out;
+	-ms-transition: all 0.30s ease-in-out;
+	-o-transition: all 0.30s ease-in-out;
+} 
+
+.hexagono:after { 
+   width: 0; 
+   height: 0; 
+   content: ""; 
+   position: absolute; 
+   bottom: -25px; 
+   left: 0; 
+   border-left: 36px solid transparent; 
+   border-right: 35px solid transparent; 
+   border-top: 25px solid #303F9F;
+	-webkit-transition: all 0.30s ease-in-out;
+	-moz-transition: all 0.30s ease-in-out;
+	-ms-transition: all 0.30s ease-in-out;
+	-o-transition: all 0.30s ease-in-out;
+}
+
+.circle-selected{
+	background-color:#FF5252;
+}
+.circle-selected:before{
+   border-bottom: 25px solid #FF5252;
+}
+.circle-selected:after{
+   border-top: 25px solid #FF5252;
+}
+
+.container-tables{
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+}
+.container-tables div{
+  width: 100%;
+  height: 100%;
+}
+.table-drag{
+  width: auto !important;
+  height: auto !important;
+  display: inline-block;
+}
+.table-drag div{
+  display: inline-block;
+}
+.blueprint-first{
+	border-radius: 5px;
+	padding: 10px;
+	width: 100%;
+	height: 95%;
+	border:solid black 2.5px;
+}
+.container-bluprints{
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}
+.container-bluprints div{
+  width: 100%;
+  height: 95%;
+}
+.tables-container{
+  height: 600px;
+}
+
+.nav-title{
+    line-height: 122px !important;
+    font-size: 48px !important;
+    -webkit-font-smoothing: antialiased !important; 
+    color: #fff !important;
+    text-decoration: none !important;
+}
+.nav-title:active, .nav-title:hover {
+    outline: 0;
+}

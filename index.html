@@ -2,14 +2,182 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>Recepciones - Ashley Peregrina</title>
+
+  <link rel="stylesheet" href="bower_components/foundation-sites/dist/css/foundation.css" />
+  <link rel="stylesheet" href="bower_components/animate.css/animate.min.css" />
+  <link rel="stylesheet" href="bower_components/materialize/dist/css/materialize.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+  <body >
+      <header>
+        <nav class="top-nav">
+          <div class="container">
+            <div class="nav-wrapper"><a class="page-title nav-title">Quinceañera de Ashley Peregrina</a></div>
+          </div>
+        </nav>
+        <ul id="nav-mobile" class="side-nav fixed" style="transform: translateX(0%); ">
+          <li class="padding-20">
+              <div class="card-image" style="    border-bottom: 1px solid #d0d0d0;">
+                <video class="responsive-video"  autoplay="" id="camera-demo" ></video>
+              </div>  
+              <!-- <img id="image" src="qrcode.jpg" alt=""> -->
+             <div class="card-content">
+                <div class="row" style="    margin-top: 30px;">
+                    <div class="input-field col l12" style="margin-bottom: 30px;">
+                       <label class="active">Nombre:</label>
+                       <h5 id="name" class="animated " style="margin-bottom: 0px;">______</h4>
+                    </div>
+                    <div class="input-field col l12" style="margin-bottom: 30px;">
+                       <label class="active">Personas:</label>
+                       <div id="persons" class="animated stat"><small>______</small></div>
+                    </div>
+                    <div class="input-field col l12" style="margin-bottom: 30px;">
+                       <label class="active">No. Mesa:</label>
+                       <div id="tableNumber" class="animated stat">______</div>
+                    </div>
+                </div>
+             </div>
+          </li>
+        </ul>
+      </header>
+      <main class="fill-height-or-more ">
+        <div class="container">
+          <div class="row">
+            <div class="col s12 m12 l12">
+              <div class="auto cell tables-container">
+
+                <div class="container-bluprints">
+                <div class="card">
+
+                  <div class="card-content">
+                    <span class="card-title">Mesas</span>
+                      <div id="tables-place" class="container-tables grey lighten-4">
+                      </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+  <script id="tpl-table" type="text/x-handlebars-template">
+      <div class="ui-widget-content draggable table-drag">
+        <div class="table">
+          <a class="btn-floating btn-large waves-effect waves-light" id="table-{{id}}"><i class="material-icons">{{table_number}}</i></a>
+        </div>
+      </div>
+  </script>
+
+
+
+
+
+  <script src="bower_components/qcode-decoder/build/qcode-decoder.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="bower_components/store2/dist/store2.min.js" onload="window.store = module.exports;"></script>
+    <!-- <script src="bower_components/handlebars/handlebars.min.js" onload="window.Handlebars = module.exports;"></script> -->
+
+  <script  type='text/javascript'>
+
+    // require('electron').ipcRenderer.on('load-database', (event, message) => {
+    //   console.log(message)  // Prints 'whoooooooh!'
+    // })
+
+
+    $(document).ready(()=>{
+      var database={};
+      $.getJSON( "database.json", function( data ) {
+        database=data;
+        loadDataInvites(data.invites.attendends);
+        loadTables(data.tables);
+      });
+
+      function loadDataInvites(data){
+        var invites = store.namespace('invites');
+        var attendendsArray=[];
+        attendendsArray=data;
+        invites('attendends',attendendsArray);
+      }
+      loadDataInvites();
+
+      function loadTables(data){
+        if(data){
+          for (var i = 0; i < data.length; i++) {
+            var obj=data[i];
+            var source   = $("#tpl-table").html().replace('{{id}}',obj.id).replace('{{table_number}}',obj.id);
+            $("#tables-place").append(source);
+            // var template = Handlebars.compile(source);
+            // $("#tables-place").append(template(obj));
+          }
+
+          $( ".draggable" ).draggable({
+            containment: "parent"
+          });
+        }
+      }
+      loadTables();
+
+      function getAttendend(id){
+        var attendends=store.invites.get('attendends')
+        for (var i = 0; i < attendends.length; i++) {
+          var obj=attendends[i]
+          if(obj.id===id){
+            return obj;
+          }
+        }
+        return {};
+      }
+
+
+
+
+      $('#btn-add-table').on('click',()=>{
+        $('#tables-place').append($('#tpl-table').html());
+          $( ".draggable" ).draggable({
+          containment: "parent", 
+          scroll: false
+        });
+      });
+      $.fn.extend({
+          animateCss: function (animationName) {
+              var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+              this.addClass('animated ' + animationName).one(animationEnd, function() {
+                  $(this).removeClass('animated ' + animationName);
+              });
+          }
+      });
+
+      var image =document.getElementById("image");
+      var videoElem =document.getElementById("camera-demo");
+      var qr = new QCodeDecoder();
+      qr.decodeFromCamera(videoElem, function (err,result) {
+        if(!err){
+          var id=undefined;
+          var splitResult=result.split('-');
+          id=splitResult[0];
+          if(id){
+            var attendend=getAttendend(Number(id));
+            var animationLetters='tada';
+            $(".table").find('a').removeClass('red pulse');
+            $("#table-"+id).addClass('red pulse');
+            var $name=$('#name');
+            var $persons=$('#persons');
+            var $tableNumber=$('#tableNumber');
+            $name.animateCss(animationLetters);
+            $name.html(attendend.name);
+            $persons.animateCss(animationLetters);
+            $persons.html(attendend.number_persons);
+            $tableNumber.animateCss(animationLetters);
+            $tableNumber.html(attendend.table_number);
+          }
+        }
+      });
+    });
+  </script>
   </body>
 
   <script>
