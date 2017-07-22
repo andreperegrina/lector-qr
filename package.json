@@ -35,7 +35,7 @@
     }
     
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/andreperegrina/lector-qr",
   "keywords": [
     "Electron",
     "quick",
