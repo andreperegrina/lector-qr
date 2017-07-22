@@ -1,5 +1,5 @@
 {
-  "name": "salon-de-graduacion",
+  "name": "salondegraduacion",
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "main.js",
@@ -49,7 +49,7 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "~1.6.2",
-    "electron-builder": "^19.13.0"
+    "electron-builder": "^19.16.2"
   },
   "dependencies": {
     "electron-json-storage": "^3.0.6",
