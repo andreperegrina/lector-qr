@@ -36,6 +36,10 @@
                        <label class="active">No. Mesa:</label>
                        <div id="tableNumber" class="animated stat">______</div>
                     </div>
+                    <div class="input-field col l12" style="margin-bottom: 30px;">
+                       <label class="active">Invitados:</label>
+                       <div id="invitesPeople" class="animated stat" style="    font-size: 1.2rem;">______</div>
+                    </div>
                 </div>
              </div>
           </li>
@@ -97,8 +101,9 @@
   .done(function() {
     console.log( "second success" );
   })
-  .fail(function() {
-    console.log( "error" );
+  .fail(function(jqXHR, textStatus, errorThrown) {
+    console.log( "error");
+    console.log(jqXHR);
   })
   .always(function() {
     console.log( "complete" );
@@ -170,16 +175,25 @@
             var attendend=getAttendend(Number(id));
             var animationLetters='tada';
             $(".table").find('a').removeClass('red pulse');
-            $("#table-"+id).addClass('red pulse');
+            $("#table-"+attendend.table_number).addClass('red pulse');
             var $name=$('#name');
             var $persons=$('#persons');
             var $tableNumber=$('#tableNumber');
+            var $invitesPeople=$('#invitesPeople');
             $name.animateCss(animationLetters);
             $name.html(attendend.name);
             $persons.animateCss(animationLetters);
             $persons.html(attendend.number_persons);
             $tableNumber.animateCss(animationLetters);
             $tableNumber.html(attendend.table_number);
+            $invitesPeople.animateCss(animationLetters);
+            var troop="";
+            if(attendend.troop)
+              for (var i = 0; i < attendend.troop.length; i++) {
+                var obj=attendend.troop[i]
+                troop+="<div style='margin-bottom:10px;'>"+obj+"</div>"+" "
+              }
+            $invitesPeople.html(troop);
           }
         }
       });
