@@ -36,6 +36,7 @@
       "target": "squirrel",
       "icon": "build/icon.ico"
     }
+    
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
